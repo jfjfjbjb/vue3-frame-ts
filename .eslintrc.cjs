@@ -17,7 +17,10 @@ module.exports = {
     // 'quote-props': ['error', 'as-needed'],
     'jsx-quotes': ['error', 'prefer-single'],
     'no-unused-vars': ['error', { args: 'none' }],
-    'vue/multi-word-component-names': 0
+    'vue/multi-word-component-names': 0,
+    'prefer-const': 0,
+    'max-len': ['error', { code: 80 }],
+    'semi': ['error', 'always']
   },
   globals: {
     require: 'writable',
