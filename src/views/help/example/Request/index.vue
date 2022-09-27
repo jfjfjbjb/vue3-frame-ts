@@ -44,10 +44,10 @@ const getRes = ref();
 const onGetData = function () {
   // 获取请求
   loading.value = true;
-  apiGet({ a: 111 }, (cancel) => {
+  apiGet({ a: 111 }, (cancel: any) => {
     console.log('取消函数：', cancel);
   })
-    .then((res) => {
+    .then((res: any) => {
       loading.value = false;
       if ($common.isSuccessCode(res)) {
         getRes.value = JSON.stringify(_.get(res, 'data.data'));
@@ -55,7 +55,7 @@ const onGetData = function () {
         $loading.hide({ method: 'error', tips: _.get(res, 'data.message') });
       }
     })
-    .catch((e) => {
+    .catch((e: any) => {
       console.log(e);
       loading.value = false;
       $loading.hide({ method: 'error', tips: e.message || '请求失败' });
@@ -66,14 +66,14 @@ const onSubmit = function (loadingParams = {}) {
   // 提交请求
   $loading.show(loadingParams);
   apiPost({ b: 222 })
-    .then((res) => {
+    .then((res: any) => {
       if ($common.isSuccessCode(res)) {
         $loading.hide(loadingParams);
       } else {
         $loading.hide({ method: 'error', tips: _.get(res, 'data.message') });
       }
     })
-    .catch((e) => {
+    .catch((e: any) => {
       console.log(e);
       $loading.hide({ method: 'error', tips: e.message || '请求失败' });
     });
@@ -83,14 +83,14 @@ const onSubmitErr = function (loadingParams = {}) {
   // 提交请求
   $loading.show(loadingParams);
   apiErr({ b: 222 })
-    .then((res) => {
+    .then((res: any) => {
       if ($common.isSuccessCode(res)) {
         $loading.hide(loadingParams);
       } else {
         $loading.hide({ method: 'error', tips: _.get(res, 'data.message') });
       }
     })
-    .catch((e) => {
+    .catch((e: any) => {
       console.log(e);
       $loading.hide({ method: 'error', tips: e.message || '请求失败' });
     });

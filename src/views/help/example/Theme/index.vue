@@ -40,7 +40,7 @@
         <custom-input
           type="color"
           :value="colorState.primaryColor"
-          @input="(e) => onChangeColor('primaryColor', e)"
+          @input="(e: any) => onChangeColor('primaryColor', e)"
         ></custom-input>
       </div>
     </a-card>
@@ -63,10 +63,10 @@ const colorState = reactive({
 });
 
 // methods
-function onChangeTheme(e) {
+function onChangeTheme(e: any) {
   changeTheme(e.target.value);
 }
-function onChangeColor(type, value) {
+function onChangeColor(type: string, value: any) {
   Object.assign(colorState, { [type]: value });
   ConfigProvider.config({
     theme: colorState

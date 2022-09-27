@@ -1,15 +1,15 @@
-import http from '../utils/http';
+import http, { getCancelToken } from '../utils/http';
 
-export function apiGet(params, cancelHandler) {
+export function apiGet(params: any, cancelHandler: Function) {
   return http({
     url: '/api/get',
     method: 'get',
     params,
-    cancelHandler
+    cancelToken: getCancelToken(cancelHandler)
   });
 }
 
-export function apiPost(params) {
+export function apiPost(params: any) {
   return http({
     url: '/api/post',
     method: 'post',
@@ -17,7 +17,7 @@ export function apiPost(params) {
   });
 }
 
-export function apiErr(params) {
+export function apiErr(params: any) {
   return http({
     url: '/api/post/err',
     method: 'post',

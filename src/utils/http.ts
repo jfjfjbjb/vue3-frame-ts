@@ -9,12 +9,11 @@ const http = axios.create({
 http.interceptors.request.use(
   function (config: any) {
     // 记录cancelToken，路由切换时取消
-    config.cancelToken = new axios.CancelToken((cancel) => {
-      window._axiosPromiseArr.push(cancel);
-      if (config.cancelHandler) {
-        config.cancelHandler(cancel);
-      }
-    });
+    if (!config.cancelToken) {
+      config.cancelToken = new axios.CancelToken((cancel) => {
+        window._axiosPromiseArr.push(cancel);
+      });
+    }
     return config;
   },
   function (error) {
@@ -38,3 +37,9 @@ http.interceptors.response.use(
 );
 
 export default http;
+export const getCancelToken = (cancelHandler: any) => {
+  return new axios.CancelToken((cancel) => {
+    window._axiosPromiseArr.push(cancel);
+    cancelHandler(cancel);
+  });
+};

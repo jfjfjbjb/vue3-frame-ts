@@ -25,7 +25,7 @@ const attrs = computed(() => {
 });
 
 /** methods */
-const onInput = function ($event) {
+const onInput = function ($event: any) {
   emit('update:value', $event.target.value);
   emit('input', $event.target.value);
 };

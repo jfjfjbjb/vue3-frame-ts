@@ -2,19 +2,20 @@
  * 全局event bus
  * （已注册于window.$bus，无需引入）
  */
-// import mitt from 'mitt';
-// const bus = mitt();
+import mitt from 'mitt';
+import type { EventType, Handler } from 'mitt';
+const bus = mitt();
 
 export default {
-  on() {
-    // bus.on(...arguments);
+  on(event: EventType, handler: Handler) {
+    bus.on(event, handler);
   },
-  emit() {
-    // bus.emit(...arguments);
+  emit(event: EventType, handler: Handler) {
+    bus.emit(event, handler);
   },
-  off() {
-    // bus.off(...arguments);
-  }
+  off(event: EventType, handler?: Handler) {
+    bus.off(event, handler);
+  },
 };
 
 /**

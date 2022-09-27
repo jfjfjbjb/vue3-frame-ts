@@ -52,14 +52,14 @@ import exampleComps from './example';
 import { useThemeStore } from '@/stores/theme';
 import { GLOBAL } from '@/utils/event';
 const themeStore = useThemeStore();
-let resizeEvent = null;
+let resizeEvent: any = null;
 
 // data
 const theme = ref('dark');
 const themeTrans = ref(false);
 const collapsed = ref(false);
-const openKeys = ref(['common']);
-const selectedKeys = ref(['Playground']);
+const openKeys = ref<string[]>(['common']);
+const selectedKeys = ref<string[]>(['Playground']);
 const menuVisible = ref(!isMobile());
 const example = ref({
   common: [
@@ -97,7 +97,7 @@ onMounted(() => {
   // resize
   $bus.on(
     GLOBAL.WINDOW_RESIZE,
-    (resizeEvent = (e) => {
+    (resizeEvent = () => {
       if (isMobile()) {
         if (menuVisible.value) {
           menuVisible.value = false;
@@ -123,13 +123,13 @@ function onChangeTheme() {
     themeTrans.value = false;
   });
 }
-function onClick({ item, key, keyPath }) {
+function onClick({ item, key, keyPath }: any) {
   console.log('onClick -> { item, key, keyPath }', { item, key, keyPath });
   if (isMobile()) {
     menuVisible.value = false;
   }
 }
-function onPageHelp(e) {
+function onPageHelp() {
   if (isMobile()) {
     menuVisible.value = false;
   }
