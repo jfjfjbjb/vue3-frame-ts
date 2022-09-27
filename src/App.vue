@@ -1,91 +1,87 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router';
-import HelloWorld from './components/HelloWorld.vue';
-</script>
-
 <template>
-  <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="@/assets/logo.svg"
-      width="125"
-      height="125"
-    />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+  <a-config-provider :locale="locale">
+    <!-- 统一empty -->
+    <template #renderEmpty>
+      <custom-empty></custom-empty>
+    </template>
+    <!-- router -->
+    <div id="entry" :class="[theme]">
+      <RouterView />
     </div>
-  </header>
-
-  <RouterView />
+    <!-- 蒙层 -->
+    <div
+      class="entry-mask ani-progress"
+      :style="{ display: maskVisible ? 'block' : 'none' }"
+    ></div>
+    <!-- back-top -->
+    <a-back-top style="right: 20px" />
+  </a-config-provider>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+<script lang="tsx" setup>
+import { ref, computed, onMounted } from 'vue';
+import zhCN from 'ant-design-vue/es/locale/zh_CN';
+import dayjs from 'dayjs';
+import { winRegister, winKeys } from './utils/window';
+import 'dayjs/locale/zh-cn';
+import { useThemeStore } from './stores/theme';
+import { GLOBAL } from './utils/event';
+dayjs.locale('zh-cn');
+const locale = ref(zhCN);
+
+// eslint-disable-next-line no-undef
+// console.log('Env.theme:', __THEME__ || '--');
+
+// data
+const maskVisible = ref(false);
+
+// computed
+const theme = computed(() => {
+  const themeStore = useThemeStore();
+  return `theme-${themeStore.theme || 'compact'}`;
+});
+
+// life circle
+onMounted(() => {
+  console.log('App Loaded!!');
+
+  // resize
+  window.addEventListener('resize', (e) => {
+    $bus.emit(GLOBAL.WINDOW_RESIZE, e);
+  });
+});
+
+// methods
+function showMask() {
+  let html = document.documentElement;
+  maskVisible.value = true;
+  html.style.overflow = 'hidden';
+}
+function hideMask() {
+  let html = document.documentElement;
+  maskVisible.value = false;
+  html.style.overflow = 'auto';
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+// expose
+let exposeObj = {
+  showMask,
+  hideMask
+};
+defineExpose(exposeObj);
+// 注册windows全局属性
+winRegister(winKeys.$ENTRY, exposeObj);
+</script>
 
-nav {
+<style scoped lang="less">
+.entry-mask {
+  position: fixed;
+  left: 0;
+  top: 0;
   width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+  height: 100%;
+  background: rgba(0, 0, 0, 0.05);
+  cursor: not-allowed;
+  z-index: @zindex-mask;
 }
 </style>

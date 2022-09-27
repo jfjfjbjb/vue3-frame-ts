@@ -10,17 +10,23 @@ module.exports = {
     // '@vue/eslint-config-prettier'
   ],
   parserOptions: {
-    ecmaVersion: 'latest'
+    ecmaVersion: 'latest',
+    ecmaFeatures: {
+      jsx: true
+    }
   },
   rules: {
-    'quotes': ['error', 'single'],
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],
+    'quotes': ['error', 'single', { allowTemplateLiterals: true }],
     // 'quote-props': ['error', 'as-needed'],
     'jsx-quotes': ['error', 'prefer-single'],
     'no-unused-vars': ['error', { args: 'none' }],
-    'vue/multi-word-component-names': 0,
-    'prefer-const': 0,
-    'max-len': ['error', { code: 80 }],
-    'semi': ['error', 'always']
+    'vue/multi-word-component-names': 'off',
+    'prefer-const': 'off',
+    // 'max-len': ['error', { code: 80 }],
+    'semi': ['error', 'always'],
+    'prefer-rest-params': 'off'
   },
   globals: {
     require: 'writable',

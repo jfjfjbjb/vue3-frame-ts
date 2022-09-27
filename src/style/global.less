@@ -1,0 +1,46 @@
+// 图片
+.@{global-prefix}-img {
+  vertical-align: middle;
+}
+
+// 建议块
+.@{global-prefix}-suggest {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  font-size: 12px;
+  padding: 12px 16px 12px 32px;
+  margin-top: 8px;
+  border-radius: 2px;
+  background: var(--color-black-1);
+
+  > li {
+    padding: 2px 0;
+    &:not(:last-child) {
+      border-bottom: 1px dashed @border-color-base;
+    }
+
+    > ul {
+      padding: 0 24px;
+    }
+  }
+  .notice {
+    color: @red-6;
+  }
+  .summary {
+    color: @green-7;
+    .font-bold();
+    &::marker {
+      content: '';
+    }
+  }
+}
+
+// 忽略动画
+.@{global-prefix}-ignore-ani {
+  transition: none !important;
+  animation: none !important;
+
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
