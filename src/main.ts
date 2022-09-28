@@ -13,7 +13,6 @@ import './style/index.less';
 const app = createApp(App);
 app.use(createPinia());
 app.use(router);
-
 // 注册windows全局属性
 wins(config);
 winRegister(winKeys.$ROOT, app);

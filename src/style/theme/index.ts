@@ -1,15 +1,12 @@
 /* eslint-disable no-undef */
-import {
-  compactThemeSingle,
-  getThemeVariables
-} from 'ant-design-vue/dist/theme';
+import { compactThemeSingle, getThemeVariables } from 'ant-design-vue/dist/theme.js';
 import { useThemeStore } from '@/stores/theme';
 
 // 设置require.resolve，否则无法执行getThemeVariables
-const g = globalThis;
+const g: any = globalThis;
 if (g.require == null) {
   g.require = {
-    resolve(url) {
+    resolve(url: string) {
       return url;
     }
   };
@@ -41,27 +38,23 @@ export default {
   'compact': compactThemeSingle,
   // 暗黑、暗黑紧凑【不可换肤】
   'dark': getThemeVariables({ dark: true }),
-  'dark-compact': Object.assign(
-    {},
-    getThemeVariables({ dark: true }),
-    compactThemeSingle
-  )
+  'dark-compact': Object.assign({}, getThemeVariables({ dark: true }), compactThemeSingle)
 };
 
 /**
  * 切换theme
  * -- 动态切换link
  */
-export function changeTheme(theme) {
-  let link = document.getElementById('dynamic-theme');
+export function changeTheme(theme: string) {
+  let link: any = document.getElementById('dynamic-theme');
   let head = document.getElementsByTagName('head')[0];
-  let app = document.getElementById('app');
-  let timeout = null;
+  let app: any = document.getElementById('app');
+  let timeout: any = null;
   const themeStore = useThemeStore();
   // const msgKey = 'change_theme_key';
   // 往目标节点后插入节点
-  function insterAfter(targetElement, newElement) {
-    var parent = targetElement.parentNode;
+  function insterAfter(targetElement: HTMLElement, newElement: HTMLElement) {
+    let parent: any = targetElement.parentNode;
     if (parent.lastChild == targetElement) {
       parent.appendChild(newElement);
     } else {
@@ -85,7 +78,7 @@ export function changeTheme(theme) {
     // 禁用动画
     app.classList.add('g-ignore-ani');
     // 创建新样式，追加到link后面
-    let newLink = document.createElement('link');
+    let newLink: any = document.createElement('link');
     newLink.setAttribute('type', 'text/css');
     newLink.setAttribute('rel', 'stylesheet');
     newLink.setAttribute('href', url);
@@ -122,10 +115,10 @@ export function changeTheme(theme) {
  * -- 全量引入theme，通过disabled切换【备用】
  * -- ?? disabled的link内容有肯能丢失
  */
-export function changeThemeBackup(theme) {
+export function changeThemeBackup(theme: string) {
   let links = document.getElementsByName('dynamic-theme');
-  let activeLink = document.getElementById(`dynamic-theme-${theme}`);
-  let app = document.getElementById('app');
+  let activeLink: any = document.getElementById(`dynamic-theme-${theme}`);
+  let app: any = document.getElementById('app');
   // let oldActiveLink = document.querySelector(
   //   '[name=dynamic-theme]:not([disabled])'
   // );
@@ -133,7 +126,7 @@ export function changeThemeBackup(theme) {
   function excute() {
     links.forEach((item) => {
       if (item.id !== `dynamic-theme-${theme}`) {
-        item.setAttribute('disabled', true);
+        item.setAttribute('disabled', 'disabled');
       }
     });
     // 重新开启动画

@@ -39,7 +39,7 @@ const router = createRouter({
   ]
 });
 
-let timeout: null | number = null;
+let timeout: any = null;
 // 用于存储请求，方便路由切换时统一取消
 // -- 不是提供给开发取用，所以没有走window.js逻辑
 (window as any)._axiosPromiseArr = [];

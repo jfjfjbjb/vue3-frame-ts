@@ -3,7 +3,7 @@ export default [
     url: '/api/get',
     method: 'get',
     timeout: 500,
-    response: ({ query }) => {
+    response: ({ query }: any) => {
       // console.log('get:', query)
       return {
         code: 0,
@@ -18,14 +18,14 @@ export default [
     url: '/api/post',
     method: 'post',
     timeout: 800,
-    response: ({body}) => {
+    response: ({ body }: any) => {
       // console.log('post:', body)
       return {
         code: 0,
         data: {
           name: 'post'
         }
-      }
+      };
     }
   },
   {
@@ -33,7 +33,7 @@ export default [
     method: 'post',
     timeout: 800,
     statusCode: 500,
-    response: ({body}) => {
+    response: ({ body }: any) => {
       // console.log('post:', body)
       return {
         code: 9999,
@@ -41,9 +41,9 @@ export default [
           name: 'err'
         },
         message: '请求发生未知错误'
-      }
+      };
     }
-  },
+  }
   // {
   //   url: '/api/text',
   //   method: 'post',

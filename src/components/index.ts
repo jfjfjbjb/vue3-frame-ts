@@ -33,7 +33,7 @@ export default function (app: App) {
       `custom${key.replace(/[A-Z]/g, ($0) => {
         return '-' + $0.toLowerCase();
       })}`,
-      item
+      item.comp
     );
   });
 }

@@ -1,5 +1,5 @@
 import loading from '@/utils/loading';
-// import common from '@/utils/common.js';
+import common from '@/utils/common.js';
 
 declare global {
   const require: any;
@@ -9,7 +9,7 @@ declare global {
   const $config: any;
   const $bus: any;
   const $loading: ReturnType<typeof loading>;
-  const $common: any;
+  const $common: typeof common;
   const $message: any;
   const $notification: any;
   const $ROOT: any;

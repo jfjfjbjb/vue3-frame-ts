@@ -55,7 +55,7 @@ export default defineConfig(({ command, mode }) => {
       }),
       svgLoader(),
       Components({
-        include: [/\.vue$/, /\.vue\?vue/, /\.jsx$/],
+        include: [/\.vue$/, /\.vue\?vue/, /\.tsx$/],
         resolvers: [
           AntDesignVueResolver({
             // 局部引入且不换肤时赋值less

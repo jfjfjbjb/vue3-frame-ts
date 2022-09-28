@@ -10,9 +10,7 @@ http.interceptors.request.use(
   function (config: any) {
     // 记录cancelToken，路由切换时取消
     if (!config.cancelToken) {
-      config.cancelToken = new axios.CancelToken((cancel) => {
-        window._axiosPromiseArr.push(cancel);
-      });
+      config.cancelToken = getCancelToken();
     }
     return config;
   },
@@ -37,9 +35,9 @@ http.interceptors.response.use(
 );
 
 export default http;
-export const getCancelToken = (cancelHandler: any) => {
+export const getCancelToken = (cancelHandler?: any) => {
   return new axios.CancelToken((cancel) => {
     window._axiosPromiseArr.push(cancel);
-    cancelHandler(cancel);
+    cancelHandler && cancelHandler(cancel);
   });
 };

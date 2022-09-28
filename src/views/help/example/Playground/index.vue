@@ -104,40 +104,41 @@ import importSrc from '@/assets/M.png';
 defineOptions({
   name: 'Playground'
 });
-const uc = useCounterStore();
-const self = {};
+const uc: any = useCounterStore();
+const self: any = {};
 // refs
 const { href: dynamicSrc } = $common.getAssetUrl('M.png');
 const state = reactive({ count: 0 });
 const cfg = reactive(config(self));
 const date = ref();
 const year = ref();
-const inputAttrs = ref({});
+const inputAttrs = ref<{ placeholder?: string; [propName: string]: any }>({});
 const inputValue = ref();
 const activeAnchor = ref('#example-playground-imgs');
 const getCurrentAnchor = ref(() => {
   return activeAnchor.value;
 });
 // computed
+
 const testStoreCounter = computed(() => {
-  return uc.counter;
+  return uc.count;
 });
 // life circle
 onMounted(() => {
   // console.log(proxy, uc.counter);
   // 监听事件
-  window.$bus.on('event-test', (data) => {
+  $bus.on('event-test', (data: any) => {
     console.log('evt: ', data);
   });
 });
 // methods
-function getJSX(h) {
+function getJSX(h: any) {
   return <a-tag color='blue'>本文件jsx</a-tag>;
 }
 function onTestPlus() {
   uc.increment();
   state.count += 1;
-  window.$bus.emit('event-test', state.count);
+  $bus.emit('event-test', state.count);
 }
 function onCompTest() {
   inputAttrs.value.placeholder = '修改后' + Math.random().toFixed(2);
@@ -145,15 +146,15 @@ function onCompTest() {
 function onCopy() {
   $common.copy(inputValue.value);
 }
-function logDate(e) {
-  window.$message.success(date.value);
+function logDate() {
+  $message.success(date.value);
   console.log('date:', date.value, year.value);
 }
-function onClickAnchor(e, link) {
+function onClickAnchor(e: any, link: any) {
   e.preventDefault();
   activeAnchor.value = link.href;
 }
-function onChangeAnchor(currentActiveLink) {
+function onChangeAnchor(currentActiveLink: any) {
   if (currentActiveLink) {
     activeAnchor.value = currentActiveLink;
   }

@@ -84,7 +84,7 @@ const example = ref({
 
 // computed
 const activeExample = computed(() => {
-  return exampleComps[selectedKeys.value[0]];
+  return (exampleComps as any)[selectedKeys.value[0]];
 });
 
 // life circle
