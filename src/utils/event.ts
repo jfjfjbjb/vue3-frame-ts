@@ -7,8 +7,11 @@ import type { EventType, Handler } from 'mitt';
 const bus = mitt();
 
 export default {
-  on(event: EventType, handler: Handler) {
-    bus.on(event, handler);
+  // on(event: EventType, handler: Handler) {
+  //   bus.on(event, handler);
+  // },
+  on(...args: [EventType, Handler]) {
+    bus.on(...args);
   },
   emit(event: EventType, handler: Handler) {
     bus.emit(event, handler);
