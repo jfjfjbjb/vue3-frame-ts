@@ -25,7 +25,7 @@ module.exports = {
     'vue/multi-word-component-names': 'off',
     'prefer-const': 'off',
     // 'max-len': ['error', { code: 80 }],
-    'semi': ['error', 'always'],
+    'semi': ['warn', 'always'],
     'prefer-rest-params': 'off'
   },
   globals: {

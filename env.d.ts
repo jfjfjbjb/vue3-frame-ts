@@ -7,3 +7,9 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>;
   export default component;
 }
+
+declare module 'ant-design-vue/dist/theme.js' {
+  export declare const darkThemeSingle: any;
+  export declare const compactThemeSingle: any;
+  export declare const getThemeVariables: any;
+}

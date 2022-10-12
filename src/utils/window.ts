@@ -7,13 +7,13 @@ import event from '@/utils/event';
 import loading from '@/utils/loading';
 import common from '@/utils/common.js';
 
-export default (config = {}) => {
+export default (config: typeof $config) => {
   // config
   (window as any).$config = config;
   // lodash
   (window as any)._ = _;
   // global loading
-  (window as any).$loading = loading(config);
+  (window as any).$loading = loading;
   // common
   (window as any).$common = common;
   // event bus

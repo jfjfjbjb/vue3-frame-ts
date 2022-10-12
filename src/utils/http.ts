@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import type { Canceler } from 'axios';
 
 const http = axios.create({
   baseURL: './',
@@ -35,7 +36,7 @@ http.interceptors.response.use(
 );
 
 export default http;
-export const getCancelToken = (cancelHandler?: any) => {
+export const getCancelToken = (cancelHandler?: Function) => {
   return new axios.CancelToken((cancel) => {
     window._axiosPromiseArr.push(cancel);
     cancelHandler && cancelHandler(cancel);
