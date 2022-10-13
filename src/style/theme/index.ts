@@ -46,15 +46,16 @@ export default {
  * -- 动态切换link
  */
 export function changeTheme(theme: string) {
-  let link: any = document.getElementById('dynamic-theme');
-  let head = document.getElementsByTagName('head')[0];
-  let app: any = document.getElementById('app');
+  let link: HTMLLinkElement = document.getElementById('dynamic-theme') as HTMLLinkElement;
+  let head: HTMLHeadElement = document.getElementsByTagName('head')[0];
+  let app: HTMLElement = document.getElementById('app') as HTMLElement;
   let timeout: any = null;
   const themeStore = useThemeStore();
   // const msgKey = 'change_theme_key';
   // 往目标节点后插入节点
   function insterAfter(targetElement: HTMLElement, newElement: HTMLElement) {
-    let parent: any = targetElement.parentNode;
+    let parent: ParentNode | null = targetElement.parentNode;
+    if (!parent) return;
     if (parent.lastChild == targetElement) {
       parent.appendChild(newElement);
     } else {
@@ -78,13 +79,12 @@ export function changeTheme(theme: string) {
     // 禁用动画
     app.classList.add('g-ignore-ani');
     // 创建新样式，追加到link后面
-    let newLink: any = document.createElement('link');
+    let newLink: HTMLLinkElement = document.createElement('link');
     newLink.setAttribute('type', 'text/css');
     newLink.setAttribute('rel', 'stylesheet');
     newLink.setAttribute('href', url);
-    newLink.onload = newLink.readystatechange = function () {
+    newLink.onload = function () {
       clearLoading();
-      // if (!newLink.readyState || /loaded|complete/.test(newLink.readyState)) {
       // 替换
       head.removeChild(link);
       newLink.setAttribute('id', 'dynamic-theme');

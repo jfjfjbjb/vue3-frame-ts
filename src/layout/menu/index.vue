@@ -67,7 +67,8 @@ export default defineComponent({
         const { _parent: parent } = meta;
 
         if (parent) {
-          parent.path === 'null' && keys.push(parent.name);
+          // parent.path === 'null' && keys.push(parent.name);
+          parent.children && parent.children.length > 0 && keys.push(parent.name);
           recursion(parent);
         }
       }

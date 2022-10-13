@@ -17,11 +17,11 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],
+    '@typescript-eslint/no-unused-vars': ['warn', { args: 'none' }],
     'quotes': ['error', 'single', { allowTemplateLiterals: true }],
     // 'quote-props': ['error', 'as-needed'],
     'jsx-quotes': ['error', 'prefer-single'],
-    'no-unused-vars': ['error', { args: 'none' }],
+    'no-unused-vars': ['warn', { args: 'none' }],
     'vue/multi-word-component-names': 'off',
     'prefer-const': 'off',
     // 'max-len': ['error', { code: 80 }],
