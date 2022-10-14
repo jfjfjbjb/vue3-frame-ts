@@ -1,46 +1,46 @@
+
 # vue3-frame-ts
 
-This template should help get you started developing with Vue 3 in Vite.
+## 目录
+- [概览](#概览)
+- [分支介绍](#分支介绍)
+- [环境配置](#环境配置)
+- [计划](#计划)
+- [温馨提示](#温馨提示)
+<br/><br/>
 
-## Recommended IDE Setup
+## 概览
+> 本项目采用**Vue3 + Vite + Typescript + Antd**搭建<br/>
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+项目预览：[ https://jfjfjbjb.github.io/vue3-frame-ts](https://jfjfjbjb.github.io/vue3-frame-ts)
+<br/><br/>
 
-## Type Support for `.vue` Imports in TS
+## 分支介绍
+ - main：主分支
+ - pure：净分支，包含基础脚手架功能，方便大家自行扩展
+ - rich：富分支，后续会扩展一个具有丰富功能的框架
+<br/><br/>
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+## 环境配置
+ - node： 16.x
+ - 编辑器：vscode
+ - 必要插件：ESLint、Prettier、Volar
+ - 系统配置 settings.json
+```json
+"editor.defaultFormatter": "esbenp.prettier-vscode",
+"editor.tabSize": 2,
+"editor.acceptSuggestionOnCommitCharacter": false
 ```
 
-### Compile and Hot-Reload for Development
+## 计划
+ - 迁移老项目核心功能
+<br/><br/>
 
-```sh
-npm run dev
-```
+## 温馨提示
+ - 项目功能未作全量测试，如果有使用问题，欢迎大家提issues
+ - 如果本项目对你有所帮助，烦请**star**一下
+<br/><br/>
 
-### Type-Check, Compile and Minify for Production
 
-```sh
-npm run build
-```
 
-### Lint with [ESLint](https://eslint.org/)
 
-```sh
-npm run lint
-```
