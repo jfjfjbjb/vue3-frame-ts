@@ -5,6 +5,7 @@
 - [概览](#概览)
 - [分支介绍](#分支介绍)
 - [环境配置](#环境配置)
+- [安装启动](#安装启动)
 - [计划](#计划)
 - [温馨提示](#温馨提示)
 <br/><br/>
@@ -30,6 +31,14 @@
 "editor.defaultFormatter": "esbenp.prettier-vscode",
 "editor.tabSize": 2,
 "editor.acceptSuggestionOnCommitCharacter": false
+```
+
+## 安装启动
+```js
+npm install //安装
+npm start //启动
+npm run report //打包分析
+npm run build //打包
 ```
 
 ## 计划
