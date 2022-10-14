@@ -14,6 +14,7 @@
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
+import type { RouteRecordRaw, RouteRecordName, RouteLocationNormalizedLoaded } from 'vue-router';
 import SubMenu from './SubMenu.vue';
 import config from './config';
 
@@ -27,8 +28,8 @@ export default defineComponent({
   setup(props) {
     const router = useRouter();
     const route = useRoute();
-    let selectedKeys = ref<string[]>([]);
-    let openKeys = ref<string[]>([]);
+    let selectedKeys = ref<Array<RouteRecordName | null | undefined>>([]);
+    let openKeys = ref<Array<RouteRecordName | null | undefined>>([]);
 
     // watch
     watch(
@@ -50,21 +51,26 @@ export default defineComponent({
         name: key
       });
     }
-    function getSelectedKeys(route: any) {
+    function getSelectedKeys(route: RouteLocationNormalizedLoaded) {
       const { meta = {} } = route;
-      const { _parent: parent } = meta;
+      // const { _parent: parent } = meta;
+      const parent = meta._parent as RouteRecordRaw;
 
       if (meta.isEntry) {
         return [route.name];
       }
-      return [(parent || {}).name];
+      if (parent) {
+        return [parent.name];
+      }
+      return [];
     }
-    function getOpenKeys(route: any) {
-      const keys: string[] = [];
+    function getOpenKeys(route: RouteLocationNormalizedLoaded) {
+      const keys: Array<RouteRecordName | null | undefined> = [];
 
-      function recursion(route: any) {
+      function recursion(route: RouteLocationNormalizedLoaded | RouteRecordRaw) {
         const { meta = {} } = route;
-        const { _parent: parent } = meta;
+        // const { _parent: parent } = meta;
+        const parent = meta._parent as RouteRecordRaw;
 
         if (parent) {
           // parent.path === 'null' && keys.push(parent.name);

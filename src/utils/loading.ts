@@ -30,7 +30,6 @@ const Loading = {
     const { useMessage = false, method, tips, errTitle } = params;
     if (method && method !== 'success') {
       // 非成功时，使用notification显示信息
-      // const _method = method || 'error';
       $notification[method || 'error']({
         message: errTitle || '请求失败',
         description: tips || ''

@@ -25,9 +25,10 @@ const attrs = computed(() => {
 });
 
 /** methods */
-const onInput = function ($event: any) {
-  emit('update:value', $event.target.value);
-  emit('input', $event.target.value);
+const onInput = function ($event: Event) {
+  const target = $event.target as HTMLInputElement;
+  emit('update:value', target.value);
+  emit('input', target.value);
 };
 
 /** watch */

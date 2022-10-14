@@ -2,7 +2,7 @@
   <div class="layout-root">
     <!-- 顶部布局 -->
     <Top />
-    <!-- TODO -->
+    <!-- TODO: other layouts -->
   </div>
 </template>
 
