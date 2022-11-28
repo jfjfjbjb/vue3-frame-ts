@@ -3,24 +3,24 @@
     <div class="examples">
       <a-card hoverable title="图片使用" id="example-playground-imgs">
         <a-divider style="margin-top: 0" :plain="true" orientation="left">基础图片</a-divider>
-        【<img alt="Vue logo" class="logo" src="@/assets/M.png" />
-        <img alt="Vue logo" class="logo" src="@/assets/js.jpeg" />】
+        【<img alt="Vue logo" class="logo" src="@/assets/img/M.png" />
+        <img alt="Vue logo" class="logo" src="@/assets/img/js.jpeg" />】
         <img alt="Vue logo" class="logo" :src="importSrc" />
         <img alt="Vue logo" class="logo" :src="dynamicSrc" />
-        <img alt="Vue logo" class="logo" src="@/assets/oceanbase.svg?url" />
+        <img alt="Vue logo" class="logo" src="@/assets/img/oceanbase.svg?url" />
         <OceanbaseIcon class="logo g-img" />
         <div class="bg-img"></div>
         <!-- suggest -->
         <ul class="g-suggest">
-          <li>src="@/assets/M.png" | @/assets/js.jpeg</li>
-          <li>import importSrc from '@/assets/M.png';</li>
+          <li>src="@/assets/img/M.png" | @/assets/img/js.jpeg</li>
+          <li>import importSrc from '@/assets/img/M.png';</li>
           <li>const { href: dynamicSrc } = $common.getAssetUrl('M.png');</li>
-          <li>【svg图片使用】src="@/assets/oceanbase.svg?url"</li>
+          <li>【svg图片使用】src="@/assets/img/oceanbase.svg?url"</li>
           <li>
-            【svg组件使用】import OceanbaseIcon from '@/assets/oceanbase.svg?component';
+            【svg组件使用】import OceanbaseIcon from '@/assets/img/oceanbase.svg?component';
             <span class="notice">（样式必须内联，否则如上图没有颜色）</span>
           </li>
-          <li>background-image: url('@/assets/oceanbase.svg');</li>
+          <li>background-image: url('@/assets/img/oceanbase.svg');</li>
         </ul>
         <a-divider :plain="true" orientation="left">可预览图片</a-divider>
         <div>
@@ -97,9 +97,9 @@
 /* eslint-disable no-unused-vars */
 import { reactive, ref, computed, onMounted } from 'vue';
 import { useCounterStore } from '@/stores/counter';
-import OceanbaseIcon from '@/assets/oceanbase.svg?component';
+import OceanbaseIcon from '@/assets/img/oceanbase.svg?component';
 import config from './config.jsx';
-import importSrc from '@/assets/M.png';
+import importSrc from '@/assets/img/M.png';
 // const { proxy } = getCurrentInstance();
 defineOptions({
   name: 'Playground'
@@ -175,7 +175,7 @@ self.state = state;
   width: 50px;
   height: 50px;
   display: inline-block;
-  background-image: url('@/assets/oceanbase.svg');
+  background-image: url('@/assets/img/oceanbase.svg');
   background-repeat: no-repeat;
   background-position: center;
   vertical-align: middle;

@@ -46,7 +46,7 @@
 <script lang="ts" setup>
 // eslint-disable-next-line no-unused-vars
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
-import Logo from '@/assets/logo.svg?component';
+import Logo from '@/assets/img/logo.svg?component';
 // import { FireOutlined } from '@ant-design/icons-vue';
 import exampleComps from './example';
 import { useThemeStore } from '@/stores/theme';
