@@ -1,3 +1,6 @@
+/**
+ * 单例模式：同一时间发起多个相同请求，只请求一次
+ */
 import Http from '@/utils/http';
 import type { AxiosPromise } from 'axios';
 
