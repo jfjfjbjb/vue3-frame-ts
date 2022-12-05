@@ -36,6 +36,7 @@ declare module '@vue/runtime-core' {
     ASpin: typeof import('ant-design-vue/es')['Spin']
     ASubMenu: typeof import('ant-design-vue/es')['SubMenu']
     ATag: typeof import('ant-design-vue/es')['Tag']
+    BlockOutlined: typeof import('@ant-design/icons-vue')['BlockOutlined']
     Empty: typeof import('./src/components/Empty/index.vue')['default']
     FireOutlined: typeof import('@ant-design/icons-vue')['FireOutlined']
     Input: typeof import('./src/components/Input/index.vue')['default']

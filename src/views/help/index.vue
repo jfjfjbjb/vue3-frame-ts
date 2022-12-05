@@ -21,10 +21,20 @@
           <template #title>
             <span>
               <fire-outlined />
-              <span>公用示例</span>
+              <span>通用</span>
             </span>
           </template>
-          <a-menu-item v-for="item in example.common" :key="item.key">{{
+          <a-menu-item v-for="item in example.common" :key="item.key">{{ item.name }}</a-menu-item>
+        </a-sub-menu>
+        <!-- component -->
+        <a-sub-menu key="component" @click.stop="() => {}">
+          <template #title>
+            <span>
+              <block-outlined />
+              <span>组件</span>
+            </span>
+          </template>
+          <a-menu-item v-for="item in example.component" :key="item.key">{{
             item.name
           }}</a-menu-item>
         </a-sub-menu>
@@ -61,30 +71,14 @@ const collapsed = ref(false);
 const openKeys = ref<string[]>(['common']);
 const selectedKeys = ref<string[]>(['Playground']);
 const menuVisible = ref(!isMobile());
-const example = ref({
-  common: [
-    {
-      key: 'Playground',
-      name: 'Playground'
-    },
-    {
-      key: 'Request',
-      name: 'Request'
-    },
-    {
-      key: 'Theme',
-      name: 'Theme'
-    }
-    // {
-    //   key: 'Form',
-    //   name: 'Form'
-    // }
-  ]
-});
+const example = ref({ ...exampleComps });
+const flatComps = Object.values(exampleComps).flat();
+// console.log(exampleComps, flatComps);
 
 // computed
 const activeExample = computed(() => {
-  return (exampleComps as any)[selectedKeys.value[0]];
+  const item = flatComps.find((item) => item.key === selectedKeys.value[0]) || {};
+  return item.comp;
 });
 
 // life circle
