@@ -31,6 +31,12 @@ function resolveModules(modules: any) {
   return comps;
 }
 
+/**
+ * 目前采取的是每个块独立提取组件，然后解析拼接
+ * 优势：只需添加组件文件，即可完成新增
+ * 劣势：无法排序和选择
+ * -- 如果需要，后续可调整为在本文件统一提取组件，解析后传出，由外部决定顺序等
+ */
 export default {
   common: resolveModules(common),
   component: resolveModules(component)

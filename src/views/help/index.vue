@@ -44,9 +44,9 @@
     <a-layout style="padding: 24px">
       <Transition>
         <!-- keep-alive本地开发热更新报错，还未解决 https://github.com/vuejs/core/issues/6222 -->
-        <keep-alive>
-          <component :is="activeExample" :key="selectedKeys[0]" />
-        </keep-alive>
+        <!-- <keep-alive> -->
+        <component :is="activeExample" :key="selectedKeys[0]" />
+        <!-- </keep-alive> -->
       </Transition>
       <!-- <component :is="activeExample" :key="selectedKeys[0]" /> -->
     </a-layout>
