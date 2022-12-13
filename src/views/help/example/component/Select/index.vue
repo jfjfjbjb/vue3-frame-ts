@@ -6,7 +6,17 @@
       </template>
       <custom-select style="width: 200px" v-bind="selectParams" />
       <custom-select style="width: 200px" v-bind="selectParams" :value="2" />
-      <custom-select style="width: 200px" v-bind="selectParams" v-model:value="modelValue" />
+      <custom-select
+        style="width: 200px"
+        v-bind="selectParams"
+        v-model:value="modelValue"
+      ></custom-select>
+    </a-card>
+    <a-card hoverable title="请求">
+      <!-- <template #extra>
+        <a-button @click="onGetData" size="small">获取</a-button>
+      </template> -->
+      <custom-select style="width: 200px" v-bind="reqSelectParams" />
     </a-card>
   </div>
 </template>
@@ -15,7 +25,7 @@
 import { ref } from 'vue';
 
 // normal
-const selectParams = ref({
+let selectParams = ref({
   options: [
     { label: 'name1', value: 1 },
     { label: 'name2', value: 2 },
@@ -26,6 +36,11 @@ let modelValue = ref();
 const onGetData = function () {
   console.log('modelValue: ', modelValue.value);
 };
+
+// 带请求
+let reqSelectParams = ref({
+  url: 'api/select'
+});
 </script>
 
 <style scoped lang="less"></style>

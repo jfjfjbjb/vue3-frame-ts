@@ -24,6 +24,9 @@ declare global {
   interface Window {
     _axiosPromiseArr: any[];
   }
+  interface ObjectAny {
+    [prop: string]: any;
+  }
 }
 
 export {};

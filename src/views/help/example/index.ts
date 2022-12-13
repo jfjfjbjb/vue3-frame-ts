@@ -1,7 +1,7 @@
 import common from './common';
 import component from './component';
 
-function resolveModules(modules: any) {
+function resolveModules(parent: string, modules: any) {
   // console.log(modules);
   const comps: any[] = [];
 
@@ -25,6 +25,7 @@ function resolveModules(modules: any) {
     comps.push({
       key: _key,
       name: _key,
+      parent,
       comp: (modules[key] as any).default
     });
   }
@@ -38,6 +39,6 @@ function resolveModules(modules: any) {
  * -- 如果需要，后续可调整为在本文件统一提取组件，解析后传出，由外部决定顺序等
  */
 export default {
-  common: resolveModules(common),
-  component: resolveModules(component)
+  common: resolveModules('common', common),
+  component: resolveModules('component', component)
 };

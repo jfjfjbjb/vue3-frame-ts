@@ -29,6 +29,7 @@ module.exports = {
     'prefer-rest-params': 'off'
   },
   globals: {
+    // 公用方法和组件
     require: 'writable',
     defineOptions: 'readonly',
     _: 'readonly',
@@ -39,6 +40,8 @@ module.exports = {
     $message: 'readonly',
     $notification: 'readonly',
     $ROOT: 'readonly',
-    $ENTRY: 'readonly'
+    $ENTRY: 'readonly',
+    // ts类型
+    ObjectAny: 'readonly'
   }
 };

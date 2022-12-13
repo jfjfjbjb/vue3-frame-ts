@@ -61,6 +61,7 @@ import Logo from '@/assets/img/logo.svg?component';
 import exampleComps from './example';
 import { useThemeStore } from '@/stores/theme';
 import { GLOBAL } from '@/utils/event';
+// import { useRouter } from 'vue-router';
 const themeStore = useThemeStore();
 let resizeEvent: any = null;
 
@@ -68,11 +69,13 @@ let resizeEvent: any = null;
 const theme = ref('dark');
 const themeTrans = ref(false);
 const collapsed = ref(false);
-const openKeys = ref<string[]>(['common']);
-const selectedKeys = ref<string[]>(['Playground']);
 const menuVisible = ref(!isMobile());
 const example = ref({ ...exampleComps });
 const flatComps = Object.values(exampleComps).flat();
+const initMenuKey = sessionStorage.getItem('helpMenuKey') || 'Playground';
+const initOpenKey = (flatComps.find((item) => item.key === initMenuKey) || {}).parent || 'common';
+const openKeys = ref<string[]>([initOpenKey]);
+const selectedKeys = ref<string[]>([initMenuKey]);
 // console.log(exampleComps, flatComps);
 
 // computed
@@ -119,6 +122,7 @@ function onChangeTheme() {
 }
 function onClick({ item, key, keyPath }: any) {
   console.log('onClick -> { item, key, keyPath }', { item, key, keyPath });
+  sessionStorage.setItem('helpMenuKey', key);
   if (isMobile()) {
     menuVisible.value = false;
   }
