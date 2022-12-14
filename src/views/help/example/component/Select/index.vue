@@ -2,7 +2,7 @@
   <div class="example-form">
     <a-card hoverable title="normal">
       <template #extra>
-        <a-button @click="onGetData" size="small">获取</a-button>
+        <a-button @click="onGetData" size="small">打印</a-button>
       </template>
       <custom-select style="width: 200px" v-bind="selectParams" />
       <custom-select style="width: 200px" v-bind="selectParams" :value="2" />
@@ -10,6 +10,7 @@
         style="width: 200px"
         v-bind="selectParams"
         v-model:value="modelValue"
+        placeholder="双向绑定"
       ></custom-select>
     </a-card>
     <a-card hoverable title="请求">
@@ -34,7 +35,8 @@ let selectParams = ref({
 });
 let modelValue = ref();
 const onGetData = function () {
-  console.log('modelValue: ', modelValue.value);
+  // vite cache bug;
+  $message.info(`modelValue: ${modelValue.value}`);
 };
 
 // 带请求

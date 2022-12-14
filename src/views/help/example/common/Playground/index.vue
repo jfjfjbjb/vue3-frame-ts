@@ -62,7 +62,10 @@
         <div>
           <a-date-picker v-model:value="date" valueFormat="YYYY-MM-DD" @change="logDate" />
           <a-date-picker v-model:value="year" picker="year" @change="logDate" />
-          <div>{{ date }}</div>
+          <div>
+            <span style="margin-right: 8px">{{ 'data: ' + (date || '--') }}</span>
+            <span>{{ 'year: ' + (year ? year.format('YYYY') : '--') }}</span>
+          </div>
         </div>
         <a-divider />
         <div>
@@ -72,10 +75,14 @@
             placeholder="默认placeholder"
             v-bind="inputAttrs"
           />
-          <a-button @click="onCompTest">修改placeholder</a-button>
-          <a-button @click="onCopy">复制【$common.copy】</a-button>
-          <a-button class="clipboard" :data-clipboard-text="inputValue">复制【clipboard】</a-button>
-          <div>{{ inputValue }}</div>
+          <span>{{ inputValue }}</span>
+          <div>
+            <a-button @click="onCompTest">修改placeholder</a-button>
+            <a-button @click="onCopy">复制【$common.copy】</a-button>
+            <a-button class="clipboard" :data-clipboard-text="inputValue">
+              复制【clipboard】
+            </a-button>
+          </div>
         </div>
       </a-card>
     </div>
@@ -147,8 +154,7 @@ function onCopy() {
   $common.copy(inputValue.value);
 }
 function logDate() {
-  $message.success(date.value);
-  console.log('date:', date.value, year.value);
+  console.log('date:', date.value, year.value ? year.value.format('YYYY') : '');
 }
 function onClickAnchor(e: any, link: any) {
   e.preventDefault();
