@@ -71,7 +71,7 @@ export default [
         'code': 0,
         'data|10': [
           {
-            'label': '@name',
+            'name': '@name',
             'value|+1': 0
           }
         ]

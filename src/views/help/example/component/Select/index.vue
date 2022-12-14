@@ -41,8 +41,15 @@ const onGetData = function () {
 
 // 带请求
 let reqSelectParams = ref({
-  url: 'api/select'
+  url: 'api/select',
+  allowClear: true,
+  fieldNames: { label: 'name' },
+  loaded: (res: Array<ObjectAny>) => {
+    console.log('reqSelectData: ', res);
+  }
 });
+console.log(reqSelectParams);
+
 </script>
 
 <style scoped lang="less"></style>

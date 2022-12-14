@@ -1,6 +1,6 @@
 <template>
-  <a-select class="custom-select" v-bind="attrs" :value="localValue" :loading="loading">
-    <a-select-option v-for="item in data" :key="item.value">
+  <a-select class="custom-select" v-bind="attrs" :value="selectValue" :loading="loading">
+    <a-select-option v-for="item in selectOptions" :key="item.value">
       {{ item.label }}
     </a-select-option>
   </a-select>
@@ -23,7 +23,10 @@ const props = defineProps({
   value: [String, Number, Array<String>, Array<Number>],
   options: Array<ObjectAny>,
   url: String,
-  reqParams: Object
+  reqParams: Object,
+  // 钩子
+  beforeLoaded: Function,
+  loaded: Function
 });
 /** emit */
 const emit = defineEmits(['update:value', 'change']);
@@ -35,7 +38,21 @@ let loading = ref(false);
 
 /** computed */
 const attrs = computed(() => {
-  return Object.assign({}, defaultAttrs, useAttrs(), { onChange: onChange });
+  return Object.assign({}, defaultAttrs, useAttrs(), { fieldNames: {}, onChange: onChange });
+});
+const selectValue = computed(() => {
+  return localValue.value;
+});
+const selectOptions = computed(() => {
+  const { fieldNames = {} } = useAttrs() as any;
+  // 自行处理fieldNames以支持a-select-option，暂时只支持一级
+  return (data.value || []).map((item) => {
+    return {
+      ...item,
+      label: item[fieldNames.label || 'label'],
+      value: item[fieldNames.value || 'value']
+    };
+  });
 });
 
 /** life circle */
@@ -65,7 +82,11 @@ const getList = function () {
   })
     .then((res) => {
       loading.value = false;
+      const { beforeLoaded, loaded } = props;
+      beforeLoaded && beforeLoaded(res);
+      // 处理数据
       data.value = res as Array<ObjectAny>;
+      loaded && loaded(res);
     })
     .catch((e) => {
       loading.value = false;
@@ -80,6 +101,17 @@ watch(
       console.log('select newVal:', newVal, oldVal);
       localValue.value = newVal;
     }
+  }
+);
+watch([() => props.url, () => props.reqParams], (newVal, oldVal) => {
+  if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+    getList();
+  }
+});
+watch(
+  () => props.options,
+  (newVal = [], oldVal) => {
+    data.value = newVal;
   }
 );
 </script>
