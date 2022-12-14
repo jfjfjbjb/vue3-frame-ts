@@ -1,3 +1,4 @@
+// import { Random } from 'mockjs';
 export default [
   {
     url: '/api/get',
@@ -43,7 +44,7 @@ export default [
         message: '请求发生未知错误'
       };
     }
-  }
+  },
   // {
   //   url: '/api/text',
   //   method: 'post',
@@ -60,4 +61,21 @@ export default [
   //     res.end(`hello, ${reqbody}`);
   //   }
   // }
+  {
+    url: '/api/select',
+    method: 'get',
+    timeout: 1000,
+    response: ({ query }: any) => {
+      // console.log('get:', query)
+      return {
+        'code': 0,
+        'data|10': [
+          {
+            'label': '@name',
+            'value|+1': 0
+          }
+        ]
+      };
+    }
+  }
 ];

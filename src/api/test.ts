@@ -24,3 +24,11 @@ export function apiErr(params: any) {
     data: params
   });
 }
+
+export function apiSelect(params: any) {
+  return http({
+    url: '/api/select',
+    method: 'get',
+    params
+  });
+}

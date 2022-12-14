@@ -94,6 +94,9 @@ export default defineConfig(({ command, mode }) => {
         }
       }
     },
+    server: {
+      port: 8000
+    },
     build: {
       minify: 'terser',
       terserOptions: {

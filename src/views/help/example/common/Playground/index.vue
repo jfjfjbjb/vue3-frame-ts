@@ -3,24 +3,24 @@
     <div class="examples">
       <a-card hoverable title="图片使用" id="example-playground-imgs">
         <a-divider style="margin-top: 0" :plain="true" orientation="left">基础图片</a-divider>
-        【<img alt="Vue logo" class="logo" src="@/assets/M.png" />
-        <img alt="Vue logo" class="logo" src="@/assets/js.jpeg" />】
+        【<img alt="Vue logo" class="logo" src="@/assets/img/M.png" />
+        <img alt="Vue logo" class="logo" src="@/assets/img/js.jpeg" />】
         <img alt="Vue logo" class="logo" :src="importSrc" />
         <img alt="Vue logo" class="logo" :src="dynamicSrc" />
-        <img alt="Vue logo" class="logo" src="@/assets/oceanbase.svg?url" />
+        <img alt="Vue logo" class="logo" src="@/assets/img/oceanbase.svg?url" />
         <OceanbaseIcon class="logo g-img" />
         <div class="bg-img"></div>
         <!-- suggest -->
         <ul class="g-suggest">
-          <li>src="@/assets/M.png" | @/assets/js.jpeg</li>
-          <li>import importSrc from '@/assets/M.png';</li>
+          <li>src="@/assets/img/M.png" | @/assets/img/js.jpeg</li>
+          <li>import importSrc from '@/assets/img/M.png';</li>
           <li>const { href: dynamicSrc } = $common.getAssetUrl('M.png');</li>
-          <li>【svg图片使用】src="@/assets/oceanbase.svg?url"</li>
+          <li>【svg图片使用】src="@/assets/img/oceanbase.svg?url"</li>
           <li>
-            【svg组件使用】import OceanbaseIcon from '@/assets/oceanbase.svg?component';
+            【svg组件使用】import OceanbaseIcon from '@/assets/img/oceanbase.svg?component';
             <span class="notice">（样式必须内联，否则如上图没有颜色）</span>
           </li>
-          <li>background-image: url('@/assets/oceanbase.svg');</li>
+          <li>background-image: url('@/assets/img/oceanbase.svg');</li>
         </ul>
         <a-divider :plain="true" orientation="left">可预览图片</a-divider>
         <div>
@@ -62,7 +62,10 @@
         <div>
           <a-date-picker v-model:value="date" valueFormat="YYYY-MM-DD" @change="logDate" />
           <a-date-picker v-model:value="year" picker="year" @change="logDate" />
-          <div>{{ date }}</div>
+          <div>
+            <span style="margin-right: 8px">{{ 'data: ' + (date || '--') }}</span>
+            <span>{{ 'year: ' + (year ? year.format('YYYY') : '--') }}</span>
+          </div>
         </div>
         <a-divider />
         <div>
@@ -72,10 +75,14 @@
             placeholder="默认placeholder"
             v-bind="inputAttrs"
           />
-          <a-button @click="onCompTest">修改placeholder</a-button>
-          <a-button @click="onCopy">复制【$common.copy】</a-button>
-          <a-button class="clipboard" :data-clipboard-text="inputValue">复制【clipboard】</a-button>
-          <div>{{ inputValue }}</div>
+          <span>{{ inputValue }}</span>
+          <div>
+            <a-button @click="onCompTest">修改placeholder</a-button>
+            <a-button @click="onCopy">复制【$common.copy】</a-button>
+            <a-button class="clipboard" :data-clipboard-text="inputValue">
+              复制【clipboard】
+            </a-button>
+          </div>
         </div>
       </a-card>
     </div>
@@ -97,9 +104,9 @@
 /* eslint-disable no-unused-vars */
 import { reactive, ref, computed, onMounted } from 'vue';
 import { useCounterStore } from '@/stores/counter';
-import OceanbaseIcon from '@/assets/oceanbase.svg?component';
+import OceanbaseIcon from '@/assets/img/oceanbase.svg?component';
 import config from './config.jsx';
-import importSrc from '@/assets/M.png';
+import importSrc from '@/assets/img/M.png';
 // const { proxy } = getCurrentInstance();
 defineOptions({
   name: 'Playground'
@@ -147,8 +154,7 @@ function onCopy() {
   $common.copy(inputValue.value);
 }
 function logDate() {
-  $message.success(date.value);
-  console.log('date:', date.value, year.value);
+  console.log('date:', date.value, year.value ? year.value.format('YYYY') : '');
 }
 function onClickAnchor(e: any, link: any) {
   e.preventDefault();
@@ -175,7 +181,7 @@ self.state = state;
   width: 50px;
   height: 50px;
   display: inline-block;
-  background-image: url('@/assets/oceanbase.svg');
+  background-image: url('@/assets/img/oceanbase.svg');
   background-repeat: no-repeat;
   background-position: center;
   vertical-align: middle;
