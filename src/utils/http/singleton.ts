@@ -18,15 +18,10 @@ const httpCbk = (key: string, resolve: Function, reject: Function) => {
   const HttpPromise = httpCache[key];
   HttpPromise &&
     HttpPromise.then((res) => {
-      if ($common.isSuccessCode(res)) {
-        let data = _.get(res, 'data.data');
-        resolve(data);
-      } else {
-        reject(_.get(res, 'data.message'));
-      }
+      resolve(res);
     })
       .catch((e) => {
-        reject(_.get(e, 'response.data.message'));
+        reject(e);
       })
       .finally(() => {
         delete httpCache[key];

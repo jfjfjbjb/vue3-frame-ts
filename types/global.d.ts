@@ -3,6 +3,7 @@ import config from '@/config';
 import event from '@/utils/event';
 import loading from '@/utils/loading';
 import common from '@/utils/common.js';
+import httpUtil from '@/utils/http/util';
 
 declare global {
   const require: any;
@@ -13,6 +14,7 @@ declare global {
   const $bus: typeof event;
   const $loading: typeof loading;
   const $common: typeof common;
+  const $http: typeof httpUtil;
   const $message: typeof import('ant-design-vue/es')['message'];
   const $notification: typeof import('ant-design-vue/es')['notification'];
   const $ROOT: App;
@@ -26,6 +28,12 @@ declare global {
   }
   interface ObjectAny {
     [prop: string]: any;
+  }
+  interface LoadingParmas {
+    useMessage?: boolean;
+    tips?: string;
+    method?: 'success' | 'error' | 'info' | 'warning' | 'warn';
+    errTitle?: string;
   }
 }
 

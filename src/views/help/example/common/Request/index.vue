@@ -30,12 +30,50 @@
       </template>
       <a-alert type="info" message="请注意顶部变化" showIcon />
     </a-card>
+    <a-card hoverable title="$http 获取数据">
+      <template #extra>
+        <a-button @click="hOnGetData" size="small">执行</a-button>
+      </template>
+      <a-spin :spinning="hLoading">
+        <code v-if="hGetRes">{{ hGetRes }}</code>
+        <custom-empty v-else />
+      </a-spin>
+    </a-card>
+    <a-card hoverable title="$http 提交数据">
+      <template #extra>
+        <a-dropdown>
+          <a-button size="small">执行</a-button>
+          <template #overlay>
+            <a-menu>
+              <a-menu-item>
+                <a @click="hOnSubmit">progress</a>
+              </a-menu-item>
+              <!-- <a-menu-item>
+                <a @click="onSubmit({ useMessage: true })">message</a>
+              </a-menu-item> -->
+              <a-menu-item>
+                <a @click="hOnSubmitErr()">error</a>
+              </a-menu-item>
+            </a-menu>
+          </template>
+        </a-dropdown>
+      </template>
+      <a-alert type="info" message="请注意顶部变化" showIcon />
+    </a-card>
   </div>
 </template>
 
 <script lang="tsx" setup>
 import { apiGet, apiPost, apiErr } from '@/api/test';
 import { ref } from 'vue';
+import useHttpUtil from './useHttpUtil';
+const {
+  loading: hLoading,
+  getRes: hGetRes,
+  onGetData: hOnGetData,
+  onSubmit: hOnSubmit,
+  onSubmitErr: hOnSubmitErr
+} = useHttpUtil();
 // data
 const loading = ref(false);
 const getRes = ref();
@@ -58,7 +96,7 @@ const onGetData = function () {
     .catch((e: any) => {
       console.log(e);
       loading.value = false;
-      $loading.hide({ method: 'error', tips: e.message || '请求失败' });
+      // $loading.hide({ method: 'error', tips: e.message || '请求失败' });
     });
 };
 
@@ -75,7 +113,7 @@ const onSubmit = function (loadingParams = {}) {
     })
     .catch((e: any) => {
       console.log(e);
-      $loading.hide({ method: 'error', tips: e.message || '请求失败' });
+      // $loading.hide({ method: 'error', tips: e.message || '请求失败' });
     });
 };
 
@@ -92,7 +130,7 @@ const onSubmitErr = function (loadingParams = {}) {
     })
     .catch((e: any) => {
       console.log(e);
-      $loading.hide({ method: 'error', tips: e.message || '请求失败' });
+      // $loading.hide({ method: 'error', tips: e.message || '请求失败' });
     });
 };
 </script>

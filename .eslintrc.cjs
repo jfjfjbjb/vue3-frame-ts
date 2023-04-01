@@ -37,6 +37,7 @@ module.exports = {
     $bus: 'readonly',
     $loading: 'readonly',
     $common: 'readonly',
+    $http: 'readonly',
     $message: 'readonly',
     $notification: 'readonly',
     $ROOT: 'readonly',

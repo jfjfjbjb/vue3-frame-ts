@@ -82,11 +82,16 @@ const getList = function () {
   })
     .then((res) => {
       loading.value = false;
-      const { beforeLoaded, loaded } = props;
-      beforeLoaded && beforeLoaded(res);
-      // 处理数据
-      data.value = res as Array<ObjectAny>;
-      loaded && loaded(res);
+      if ($common.isSuccessCode(res)) {
+        let reqData = _.get(res, 'data.data');
+        const { beforeLoaded, loaded } = props;
+        beforeLoaded && beforeLoaded(reqData, res);
+        // 处理数据
+        data.value = reqData as Array<ObjectAny>;
+        loaded && loaded(reqData, res);
+      } else {
+        $loading.hide({ method: 'error', tips: _.get(res, 'data.message') });
+      }
     })
     .catch((e) => {
       loading.value = false;

@@ -6,13 +6,6 @@ import config from '@/config';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
-interface LoadingParmas {
-  useMessage?: boolean;
-  tips?: string;
-  method?: 'success' | 'error' | 'info' | 'warning' | 'warn';
-  errTitle?: string;
-}
-
 const msgKey = 'global_message_key';
 const { BASE = {} } = config.LOADING || {};
 NProgress.configure(BASE);

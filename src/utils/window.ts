@@ -6,6 +6,7 @@ import _ from '@/utils/lodash';
 import event from '@/utils/event';
 import loading from '@/utils/loading';
 import common from '@/utils/common.js';
+import httpUtil from '@/utils/http/util';
 
 export default (config: typeof $config) => {
   // config
@@ -18,6 +19,8 @@ export default (config: typeof $config) => {
   (window as any).$common = common;
   // event bus
   (window as any).$bus = event;
+  // http
+  (window as any).$http = httpUtil;
   // antd $message
   (window as any).$message = message;
   // antd $notification
