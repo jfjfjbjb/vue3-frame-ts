@@ -1,6 +1,6 @@
 /**
  * 全局event bus
- * （已注册于window.$bus，无需引入）
+ * （已注册于window.$bus, 无需引入）
  */
 import mitt from 'mitt';
 import type { EventType, Handler } from 'mitt';

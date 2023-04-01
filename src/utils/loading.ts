@@ -1,6 +1,6 @@
 /**
  * 全局loading
- * （已注册于window.$loading，无需引入）
+ * （已注册于window.$loading, 无需引入）
  */
 import config from '@/config';
 import NProgress from 'nprogress';

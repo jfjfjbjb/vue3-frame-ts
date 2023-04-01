@@ -1,11 +1,11 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
+import config from './config';
 import router from './router';
 import App from './App.vue';
 import components from './components/index';
-import config from './config';
 import wins, { winRegister, winKeys } from './utils/window';
-import './utils/clipboard';
+import loadAllPlugins from './plugins/index';
 // antd样式全量引入，可以支持本地换肤
 // import 'ant-design-vue/dist/antd.variable.less';
 import './style/index.less';
@@ -20,5 +20,8 @@ winRegister(winKeys.$ROOT, app);
 
 // 注册全局组件
 components(app);
+
+// 加载插件
+loadAllPlugins(app);
 
 app.mount('#app');

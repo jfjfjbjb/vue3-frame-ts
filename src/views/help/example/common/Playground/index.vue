@@ -87,6 +87,7 @@
       </a-card>
     </div>
     <a-anchor
+      v-if="anchorAlive"
       class="anchor"
       :getCurrentAnchor="getCurrentAnchor"
       @click="onClickAnchor"
@@ -102,7 +103,7 @@
 
 <script lang="tsx" setup>
 /* eslint-disable no-unused-vars */
-import { reactive, ref, computed, onMounted } from 'vue';
+import { reactive, ref, nextTick, computed, onMounted } from 'vue';
 import { useCounterStore } from '@/stores/counter';
 import OceanbaseIcon from '@/assets/img/oceanbase.svg?component';
 import config from './config.jsx';
@@ -125,14 +126,22 @@ const activeAnchor = ref('#example-playground-imgs');
 const getCurrentAnchor = ref(() => {
   return activeAnchor.value;
 });
-// computed
+const anchorAlive = ref(true);
 
+// computed
 const testStoreCounter = computed(() => {
   return uc.count;
 });
 // life circle
 onMounted(() => {
   // console.log(proxy, uc.counter);
+  // 由于transition动画，需要重绘
+  setTimeout(() => {
+    anchorAlive.value = false;
+    nextTick(() => {
+      anchorAlive.value = true;
+    });
+  }, 600);
   // 监听事件
   $bus.on('event-test', (data: any) => {
     console.log('evt: ', data);
