@@ -5,21 +5,18 @@
       <custom-empty></custom-empty>
     </template>
     <!-- router -->
-    <div id="entry" :class="[theme]">
+    <div id="entry">
       <RouterView />
     </div>
     <!-- 蒙层 -->
-    <div
-      class="entry-mask ani-progress"
-      :style="{ display: maskVisible ? 'block' : 'none' }"
-    ></div>
+    <div class="entry-mask ani-progress" :style="{ display: maskVisible ? 'block' : 'none' }"></div>
     <!-- back-top -->
     <a-back-top style="right: 20px" />
   </a-config-provider>
 </template>
 
 <script lang="tsx" setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import dayjs from 'dayjs';
 import { winRegister, winKeys } from './utils/window';
@@ -28,6 +25,7 @@ import { useThemeStore } from './stores/theme';
 import { GLOBAL } from './utils/event';
 dayjs.locale('zh-cn');
 const locale = ref(zhCN);
+const themeStore = useThemeStore();
 
 // eslint-disable-next-line no-undef
 // console.log('Env.theme:', __THEME__ || '--');
@@ -36,14 +34,25 @@ const locale = ref(zhCN);
 const maskVisible = ref(false);
 
 // computed
-const theme = computed(() => {
-  const themeStore = useThemeStore();
-  return `theme-${themeStore.theme || 'compact'}`;
-});
+// const theme = computed(() => {
+//   const themeStore = useThemeStore();
+//   return `theme-${themeStore.theme || 'compact'}`;
+// });
+
+// watch
+watch(
+  () => themeStore.theme,
+  (newVal, oldVal) => {
+    setTheme(newVal, oldVal);
+  }
+);
 
 // life circle
 onMounted(() => {
   console.log('App Loaded!!');
+
+  // 初始化theme
+  setTheme('compact');
 
   // resize
   window.addEventListener('resize', (e) => {
@@ -61,6 +70,10 @@ function hideMask() {
   let html = document.documentElement;
   maskVisible.value = false;
   html.style.overflow = 'auto';
+}
+function setTheme(newTheme: string, oldTheme?: string) {
+  oldTheme && document.body.classList.remove(`theme-${oldTheme}`);
+  document.body.classList.add(`theme-${newTheme}`);
 }
 
 // expose

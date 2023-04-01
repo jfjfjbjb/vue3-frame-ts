@@ -2,6 +2,24 @@
 @import 'ant-design-vue/lib/style/themes/variable.less';
 @import './color.less';
 
+:root,
+::before,
+::after {
+  @adjust-size-limit: 64;
+  .loop(@i) when (@i <= @adjust-size-limit) {
+    --adjust-size-@{i}: unit(@i, px);
+    .loop(@i + 1);
+  }
+  .loop(0);
+
+  @adjust-font-size-limit: 48;
+  .floop(@i) when (@i <= @adjust-font-size-limit) {
+    --adjust-font-size-@{i}: unit(@i, px);
+    .floop(@i + 1);
+  }
+  .floop(12);
+}
+
 // 动画前缀
 @ani-prefix: ani;
 // 全局样式前缀
@@ -11,7 +29,64 @@
 
 // z-index相关
 @zindex-mask: 2000;
+@zindex-pop: 1050;
 
+// 字体相关
 .font-bold() {
   font-weight: 500;
+}
+.font-size(@size) {
+  font-size: ~'var(--adjust-font-size-@{size})';
+}
+
+// padding, margin
+.padding(@size) {
+  padding: ~'var(--adjust-size-@{size})';
+}
+.padding(@sizeTB, @sizeLR) {
+  padding: ~'var(--adjust-size-@{sizeTB})' ~'var(--adjust-size-@{sizeLR})';
+}
+.padding(@sizeT, @sizeLR, @sizeB) {
+  padding: ~'var(--adjust-size-@{sizeT})' ~'var(--adjust-size-@{sizeLR})' ~'var(--adjust-size-@{sizeB})';
+}
+.padding(@sizeT, @sizeR, @sizeB, @sizeL) {
+  padding: ~'var(--adjust-size-@{sizeT})' ~'var(--adjust-size-@{sizeR})' ~'var(--adjust-size-@{sizeB})'
+    ~'var(--adjust-size-@{sizeL})';
+}
+.padding-top(@size) {
+  padding-top: ~'var(--adjust-size-@{size})';
+}
+.padding-right(@size) {
+  padding-right: ~'var(--adjust-size-@{size})';
+}
+.padding-bottom(@size) {
+  padding-bottom: ~'var(--adjust-size-@{size})';
+}
+.padding-left(@size) {
+  padding-left: ~'var(--adjust-size-@{size})';
+}
+.margin(@size) {
+  margin: ~'var(--adjust-size-@{size})';
+}
+.margin(@sizeTB, @sizeLR) {
+  margin: ~'var(--adjust-size-@{sizeTB})' ~'var(--adjust-size-@{sizeLR})';
+}
+.margin(@sizeT, @sizeLR, @sizeB) {
+  margin: ~'var(--adjust-size-@{sizeT})' ~'var(--adjust-size-@{sizeLR})' ~'var(--adjust-size-@{sizeB})';
+}
+.margin(@sizeT, @sizeR, @sizeB, @sizeL) {
+  margin: ~'var(--adjust-size-@{sizeT})' ~'var(--adjust-size-@{sizeR})' ~'var(--adjust-size-@{sizeB})'
+    ~'var(--adjust-size-@{sizeL})';
+}
+.margin-top(@size) {
+  margin-top: ~'var(--adjust-size-@{size})';
+}
+.margin-right(@size) {
+  margin-right: ~'var(--adjust-size-@{size})';
+}
+.margin-bottom(@size) {
+  margin-bottom: ~'var(--adjust-size-@{size})';
+}
+.margin-left(@size) {
+  margin-left: ~'var(--adjust-size-@{size})';
 }

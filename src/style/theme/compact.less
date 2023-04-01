@@ -1,0 +1,20 @@
+.theme-compact,
+.theme-dark-compact {
+  &,
+  ::before,
+  ::after {
+    @adjust-size-limit: 64;
+    .loop(@i) when (@i <= @adjust-size-limit) {
+      --adjust-size-@{i}: unit(if((@i - 4 <= 2), 2, @i - 4), px);
+      .loop(@i + 1);
+    }
+    .loop(0);
+
+    @adjust-font-size-limit: 48;
+    .floop(@i) when (@i <= @adjust-font-size-limit) {
+      --adjust-font-size-@{i}: unit(if((@i - 2 <= 12), 12, @i - 2), px);
+      .floop(@i + 1);
+    }
+    .floop(12);
+  }
+}
