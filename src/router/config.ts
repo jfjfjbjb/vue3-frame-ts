@@ -87,17 +87,17 @@ const routeMap: {
 function loop(list: RouteRecordRaw[] = [], parent?: RouteRecordRaw) {
   list.forEach((item: RouteRecordRaw, index: number) => {
     // 设置isEntry
-    if (!(item.children && item.children.length > 0) && index === 0 ) {
-      _.set(item, 'meta.isEntry', true);   
+    if (!(item.children && item.children.length > 0) && index === 0) {
+      _.set(item, 'meta.isEntry', true);
     }
     // 设置_parent（如果!isEntry，设置parent为entry节点）
-    if(parent) {
+    if (parent) {
       const _parent = index > 0 ? _.get(parent, 'children.0') : parent;
       _.set(item, 'meta._parent', _parent);
     }
     // 设置navi
     if (!_.get(item, 'meta.navi')) {
-      const _parent =  _.get(item, 'meta._parent');
+      const _parent = _.get(item, 'meta._parent');
       _.set(
         item,
         'meta.navi',

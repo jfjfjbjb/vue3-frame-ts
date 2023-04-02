@@ -1,5 +1,5 @@
 <template>
-  <a-config-provider :locale="locale">
+  <a-config-provider :locale="antdLocale">
     <!-- 统一empty -->
     <template #renderEmpty>
       <custom-empty></custom-empty>
@@ -17,15 +17,13 @@
 
 <script lang="tsx" setup>
 import { ref, watch, onMounted } from 'vue';
-import zhCN from 'ant-design-vue/es/locale/zh_CN';
-import dayjs from 'dayjs';
 import { winRegister, winKeys } from './utils/window';
-import 'dayjs/locale/zh-cn';
 import { useThemeStore } from './stores/theme';
 import { GLOBAL } from './utils/event';
-dayjs.locale('zh-cn');
-const locale = ref(zhCN);
+import useLocales from './hooks/useLocales';
+
 const themeStore = useThemeStore();
+const { antdLocale } = useLocales();
 
 // eslint-disable-next-line no-undef
 // console.log('Env.theme:', __THEME__ || '--');

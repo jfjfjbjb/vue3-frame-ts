@@ -12,7 +12,18 @@
         <a-menu-item key="2">nav 2</a-menu-item>
         <a-menu-item key="3">nav 3</a-menu-item>
       </a-menu> -->
-      <a-button type="primary" @click="toHelp">前往Help</a-button>
+      <div>
+        <a-radio-group
+          style="margin-right: 8px"
+          class="in-dark-block"
+          v-model:value="locale"
+          @change="onLocaleChange"
+        >
+          <a-radio-button value="en">English</a-radio-button>
+          <a-radio-button value="zh-cn">Chinese</a-radio-button>
+        </a-radio-group>
+        <a-button type="primary" @click="toHelp">{{ $t('layout.toHelp') }}</a-button>
+      </div>
     </a-layout-header>
     <a-layout>
       <a-layout-sider
@@ -79,8 +90,10 @@ import { changeTheme } from '@/style/theme';
 import { useThemeStore } from '@/stores/theme';
 import Menu from '@/layout/menu/index.vue';
 import { routeMap } from '@/router/config';
+import useLocales from '@/hooks/useLocales';
 const route = useRoute();
 const router = useRouter();
+const { locale, setLocale } = useLocales();
 
 // data
 const collapsed = ref(false);
@@ -114,6 +127,9 @@ onMounted(() => {
 });
 
 // methods
+function onLocaleChange(e: Event) {
+  setLocale(_.get(e.target, 'value'));
+}
 function toHelp() {
   router.push({
     name: 'help'
