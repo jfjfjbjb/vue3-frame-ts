@@ -15,15 +15,17 @@ const antdLocaelMap: any = {
 
 export default function () {
   const { locale } = useI18n();
-  const setLocale = (val: string) => {
+  const setLocale = (val?: string) => {
+    const _locale = val || localStorage.getItem($config.localStorage.LOCALE);
+    if (!_locale) return;
     // i18n
-    locale.value = val;
+    locale.value = _locale;
     // dayjs
     dayjs.locale(val);
     // antd
-    antdLocale.value = antdLocaelMap[val];
+    antdLocale.value = antdLocaelMap[_locale];
 
-    localStorage.setItem('locale', val);
+    localStorage.setItem($config.localStorage.LOCALE, _locale);
   };
 
   return {

@@ -50,10 +50,11 @@
 <script lang="tsx" setup>
 import { ref, reactive } from 'vue';
 import { ConfigProvider } from 'ant-design-vue';
+import { useThemeStore } from '@/stores/theme';
 import { changeTheme } from '@/style/theme';
 
 // data
-const currTheme = ref('compact');
+const currTheme = ref(useThemeStore().theme || 'compact');
 const colorState = reactive({
   primaryColor: '#1890ff'
   // errorColor: '#ff4d4f',

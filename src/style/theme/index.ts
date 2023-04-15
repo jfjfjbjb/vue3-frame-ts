@@ -45,7 +45,9 @@ export default {
  * 切换theme
  * -- 动态切换link
  */
-export function changeTheme(theme: string) {
+let inited: boolean = false;
+export function changeTheme(theme?: string) {
+  theme = theme || localStorage.getItem($config.localStorage.THEME) || 'compact';
   let link: HTMLLinkElement = document.getElementById('dynamic-theme') as HTMLLinkElement;
   let head: HTMLHeadElement = document.getElementsByTagName('head')[0];
   let app: HTMLElement = document.getElementById('app') as HTMLElement;
@@ -93,7 +95,8 @@ export function changeTheme(theme: string) {
       // 重新开启动画
       setTimeout(() => {
         app.classList.remove('g-ignore-ani');
-        $message.success({ content: '切换成功！', duration: 1.5 });
+        inited && $message.success({ content: '切换成功！', duration: 1.5 });
+        inited = true;
       }, 50);
       // }
     };

@@ -18,6 +18,7 @@ export const useThemeStore = defineStore({
   actions: {
     setTheme(val = '') {
       this.theme = val;
+      localStorage.setItem($config.localStorage.THEME, val);
     }
   }
 });

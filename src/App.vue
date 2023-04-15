@@ -18,12 +18,17 @@
 <script lang="tsx" setup>
 import { ref, watch, onMounted } from 'vue';
 import { winRegister, winKeys } from './utils/window';
-import { useThemeStore } from './stores/theme';
 import { GLOBAL } from './utils/event';
+import { useThemeStore } from './stores/theme';
+import { changeTheme } from '@/style/theme';
 import useLocales from './hooks/useLocales';
 
 const themeStore = useThemeStore();
-const { antdLocale } = useLocales();
+const { antdLocale, setLocale } = useLocales();
+// 初始化Locale
+setLocale();
+// 初始化theme
+changeTheme();
 
 // eslint-disable-next-line no-undef
 // console.log('Env.theme:', __THEME__ || '--');

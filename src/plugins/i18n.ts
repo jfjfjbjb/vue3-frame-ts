@@ -1,5 +1,6 @@
 import type { App } from 'vue';
 import { createI18n } from 'vue-i18n';
+import config from '@/config/index';
 const modules = import.meta.glob('../locales/*.ts', { eager: true });
 const messages: any = {};
 for (const key in modules) {
@@ -10,7 +11,7 @@ for (const key in modules) {
 }
 
 const i18n = createI18n({
-  locale: localStorage.getItem('locale') || 'zh-cn',
+  locale: localStorage.getItem(config.localStorage.LOCALE) || 'zh-cn',
   legacy: false,
   globalInjection: true,
   fallbackLocale: 'zh-cn',

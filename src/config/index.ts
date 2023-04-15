@@ -1,3 +1,4 @@
+import localStorage from './localStorage';
 const config = {
   // 项目
   PROJECT: {
@@ -9,7 +10,8 @@ const config = {
     BASE: {
       showSpinner: false
     }
-  }
+  },
+  localStorage
 };
 
 export default config;
