@@ -26,9 +26,12 @@ import useLocales from './hooks/useLocales';
 const themeStore = useThemeStore();
 const { antdLocale, setLocale } = useLocales();
 // 初始化Locale
-setLocale();
+const initLocale = localStorage.getItem($config.localStorage.LOCALE) || '';
+setLocale(initLocale);
 // 初始化theme
-changeTheme();
+const initTheme = localStorage.getItem($config.localStorage.THEME) || 'compact';
+changeTheme(initTheme);
+setThemeClassName(initTheme);
 
 // eslint-disable-next-line no-undef
 // console.log('Env.theme:', __THEME__ || '--');
@@ -46,16 +49,13 @@ const maskVisible = ref(false);
 watch(
   () => themeStore.theme,
   (newVal, oldVal) => {
-    setTheme(newVal, oldVal);
+    setThemeClassName(newVal, oldVal);
   }
 );
 
 // life circle
 onMounted(() => {
   console.log('App Loaded!!');
-
-  // 初始化theme
-  setTheme('compact');
 
   // resize
   window.addEventListener('resize', (e) => {
@@ -74,7 +74,7 @@ function hideMask() {
   maskVisible.value = false;
   html.style.overflow = 'auto';
 }
-function setTheme(newTheme: string, oldTheme?: string) {
+function setThemeClassName(newTheme: string, oldTheme?: string) {
   oldTheme && document.body.classList.remove(`theme-${oldTheme}`);
   document.body.classList.add(`theme-${newTheme}`);
 }

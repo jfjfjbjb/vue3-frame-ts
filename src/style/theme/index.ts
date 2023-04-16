@@ -46,8 +46,8 @@ export default {
  * -- 动态切换link
  */
 let inited: boolean = false;
-export function changeTheme(theme?: string) {
-  theme = theme || localStorage.getItem($config.localStorage.THEME) || 'compact';
+export function changeTheme(theme: string) {
+  if (!theme) return;
   let link: HTMLLinkElement = document.getElementById('dynamic-theme') as HTMLLinkElement;
   let head: HTMLHeadElement = document.getElementsByTagName('head')[0];
   let app: HTMLElement = document.getElementById('app') as HTMLElement;
