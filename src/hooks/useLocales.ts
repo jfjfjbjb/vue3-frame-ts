@@ -15,7 +15,7 @@ const antdLocaelMap: any = {
 
 export default function () {
   const { locale } = useI18n();
-  const setLocale = (val?: string) => {
+  const setLocale = (val: string) => {
     const _locale = val;
     if (!_locale) return;
     // i18n

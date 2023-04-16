@@ -13,7 +13,7 @@ import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 import DefineOptions from 'unplugin-vue-define-options/vite';
 import svgLoader from 'vite-svg-loader';
 import commonjs from 'vite-plugin-commonjs';
-import vueI18n from '@intlify/vite-plugin-vue-i18n';
+// import vueI18n from '@intlify/vite-plugin-vue-i18n';
 import { visualizer } from 'rollup-plugin-visualizer';
 // 引入theme
 // import theme from './src/style/theme';
@@ -49,9 +49,9 @@ export default defineConfig(({ command, mode }) => {
     plugins: [
       vue(),
       vueJsx(),
-      vueI18n({
-        include: './src/locales/**'
-      }),
+      // vueI18n({
+      //   include: './src/locales/**'
+      // }),
       viteMockServe({
         mockPath: './src/mock'
       }),
